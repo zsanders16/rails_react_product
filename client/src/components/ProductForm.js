@@ -15,7 +15,6 @@ class ProductForm extends React.Component{
   handleSubmit = (e) => {
     e.preventDefault();
     let product = { ...this.state }
-    debugger;
     this.props.submit(product)
     this.setState({ ...this.defaultValues })
   }

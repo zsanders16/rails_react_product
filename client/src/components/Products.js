@@ -8,7 +8,6 @@ class Products extends React.Component {
 
 
   componentDidMount() {
-    debugger;
     axios.get('/api/products')
     .then( response => {
       this.setState({products: response.data })
@@ -18,6 +17,7 @@ class Products extends React.Component {
 
   submit = (product) => {
     let { products } = this.state;
+    debugger
     axios.post('/api/products', { product })
     .then( response => {
       this.setState({ products: [response.data, ...products],
@@ -30,11 +30,7 @@ class Products extends React.Component {
     let { products } = this.state
     return (
       <ul>
-        { products.map
-          ( product =>
-            <li key={product.id}>{product.name}</li>
-          )
-        }
+        { products.map( product => <li key={product.id}>{product.name}</li> ) }
       </ul>
     )
   }

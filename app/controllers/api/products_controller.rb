@@ -10,7 +10,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def create
-    product = Product.new
+    product = Product.new(product_params)
     if product.save
       render json: product
     else
