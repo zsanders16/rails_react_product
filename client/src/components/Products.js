@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import { Button } from 'semantic-ui-react';
 import ProductForm from './ProductForm';
+import { Link } from 'react-router-dom';
+
 
 class Products extends React.Component {
   state = { products: [], displayForm: false }
@@ -17,7 +19,6 @@ class Products extends React.Component {
 
   submit = (product) => {
     let { products } = this.state;
-    debugger
     axios.post('/api/products', { product })
     .then( response => {
       this.setState({ products: [response.data, ...products],
@@ -30,7 +31,12 @@ class Products extends React.Component {
     let { products } = this.state
     return (
       <ul>
-        { products.map( product => <li key={product.id}>{product.name}</li> ) }
+        { products.map( product =>
+          <li key={product.id}>
+            <Link to={`/products/${product.id}`}>{product.name}</Link>
+          </li>
+          )
+        }
       </ul>
     )
   }
@@ -45,7 +51,6 @@ class Products extends React.Component {
     this.setState( state => {
       return { displayForm: !state.displayForm }
     })
-
   }
 
   render(){
